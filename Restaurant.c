@@ -1,6 +1,16 @@
 #include <stdio.h>
 
 
+int jumlah_barang = 50; 
+
+typedef struct barang
+{
+   char barang[256];
+
+} barang;
+
+
+
 void File_Read(){
 
 }
@@ -30,7 +40,11 @@ void Data_Sort(){
 }
 
 void Menu_Header(){
-    
+    puts ("====================================");
+    puts ("Mont Blanc Restaurant");
+    puts ("");
+    puts ("");
+    puts ("====================================");
 }
 
 void Menu_Main(){
@@ -58,6 +72,7 @@ void Menu_Purchase(){
 }
 
 void main(){
-    int Jumlah_Barang;
-    int Nama[50], Jenis[50], Harga[50];
+    barang nama[jumlah_barang];
+    int jenis[jumlah_barang];
+    int harga[jumlah_barang];
 }
