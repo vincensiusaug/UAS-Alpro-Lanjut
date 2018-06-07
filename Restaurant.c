@@ -29,8 +29,32 @@ void Data_Sort(){
 
 }
 
-void Main_Menu(){
+void Menu_Header(){
     
+}
+
+void Menu_Main(){
+    puts ("1 - Tambah Barang");
+    puts ("2 - Ubah Barang");
+    puts ("3 - Urutkan Barang");
+    puts ("4 - Pembelian");
+
+}
+
+void Menu_Add(){
+
+}
+
+void Menu_Edit(){
+
+}
+
+void Menu_Sort(){
+
+}
+
+void Menu_Purchase(){
+
 }
 
 void main(){
