@@ -11,12 +11,22 @@ typedef struct barang
 
 
 
-void File_Read(){
+void File_Read()
+{
 
 }
 
-void File_Write(){
-
+void File_Write(x)
+{  
+   FILE *fptr;
+   fptr = fopen("db.txt","a");
+   if(fptr == NULL)
+   {
+      printf("error");
+      exit(1);
+   }
+   fprintf(fptr,"%",x);
+   fclose(fptr);
 }
 
 void Data_Show(){
