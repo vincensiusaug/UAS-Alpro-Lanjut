@@ -52,27 +52,51 @@ void Data_Sort(){
 }
 
 void Menu_Header(){
-    puts ("====================================");
+    puts ("");
+    puts ("=================================");
     puts ("     Mont Blanc Restaurant");
     puts ("");
-    puts ("====================================");
+    puts ("=================================");
 }
 
 void Menu_Main(){
-    Menu_Header();
-    puts ("1 - Tambah Barang");
-    puts ("2 - Ubah Barang");
-    puts ("3 - Urutkan Barang");
-    puts ("4 - Pembelian");
-    puts ("Q - Keluar");
+    char pilihan;
+    for(;;){
+        Menu_Header();
+        puts ("1 - Tambah Menu");
+        puts ("2 - Ubah Menu");
+        puts ("3 - Urutkan Menu");
+        puts ("4 - Tampilkan Menu");
+        puts ("5 - Pembelian");
+        puts ("Q - Keluar");
+        puts ("");
+        printf ("Masukan pilihan anda: ");
+        scanf ("%c",&pilihan);
 
-}
-
-void Menu_Add(){
-    Menu_Header();
-    puts ("1 - Tambah Makanan");
-    puts ("2 - Tambah Minuman");
-    puts ("Q - Kembali");
+        if (pilihan == "1"){
+            Menu_Add();
+            continue;
+        }
+        else if(pilihan == "2"){
+            Menu_Edit();
+            continue;
+        }
+        else if(pilihan == "3"){
+            Menu_Sort();
+            continue;
+        }
+        else if(pilihan == "4"){
+            Data_Show();
+            continue;
+        }
+        else if(pilihan == "5"){
+            Menu_Purchase();
+            continue;
+        }
+        else{
+            break;
+        }
+    }
 }
 
 int Makanan(){
@@ -95,8 +119,18 @@ int Minuman(){
     return harga;
 }
 
+void Menu_Add(){
+    Menu_Header();
+    puts ("1 - Tambah Makanan");
+    puts ("2 - Tambah Minuman");
+    puts ("Q - Kembali");
+}
+
 void Menu_Edit(){
     Menu_Header();
+    puts ("1 - Masukan Kode");
+    puts ("2 - Tampilkan Menu");
+    puts ("Q - Kembali");
 }
 
 void Menu_Sort(){
