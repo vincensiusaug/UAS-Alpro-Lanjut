@@ -1,5 +1,19 @@
 #include <stdio.h>
 
+void File_Read();
+void File_Write(x);
+void Data_Show();
+void Data_Hide();
+void Data_Unhide();
+void Data_Add();
+void Data_Sort();
+void Menu_Header();
+void Menu_Main();
+void Menu_Add();
+void Menu_Edit();
+void Menu_Sort();
+void Menu_Purchase();
+
 
 
 int jumlah_barang = 50; 
@@ -53,14 +67,16 @@ void Data_Sort(){
 
 void Menu_Header(){
     puts ("");
-    puts ("=================================");
-    puts ("     Mont Blanc Restaurant");
+    puts ("================================");
+    puts ("     Mont Blanc Restaurant      ");
     puts ("");
-    puts ("=================================");
+    puts ("================================");
 }
 
 void Menu_Main(){
+
     char pilihan;
+
     for(;;){
         Menu_Header();
         puts ("1 - Tambah Menu");
@@ -72,24 +88,25 @@ void Menu_Main(){
         puts ("");
         printf ("Masukan pilihan anda: ");
         scanf ("%c",&pilihan);
+        printf ("%c",pilihan);
 
-        if (pilihan == "1"){
+        if (pilihan == '1'){
             Menu_Add();
             continue;
         }
-        else if(pilihan == "2"){
+        else if(pilihan == '2'){
             Menu_Edit();
             continue;
         }
-        else if(pilihan == "3"){
+        else if(pilihan == '3'){
             Menu_Sort();
             continue;
         }
-        else if(pilihan == "4"){
+        else if(pilihan == '4'){
             Data_Show();
             continue;
         }
-        else if(pilihan == "5"){
+        else if(pilihan == '5'){
             Menu_Purchase();
             continue;
         }
