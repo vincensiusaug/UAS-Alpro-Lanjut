@@ -27,21 +27,45 @@ typedef struct barang
 
 
 
-void File_Read()
+char* File_Read(char fname[10])
 {
-
-}
-
-void File_Write(x)
-{  
+   typedef struct arr
+   {
+      char arr[100]; // 100 character array
+   }arr;
+   arr index[100];
    FILE *fptr;
-   fptr = fopen("db.txt","a");
+   fptr = fopen(fname,"a");
+   int count=0;
    if(fptr == NULL)
    {
       printf("error");
       exit(1);
    }
-   fprintf(fptr,"%",x);
+   while (!foef(fptr))
+   {
+      
+      fgets(index[count].arr,20, fptr);
+      ++count;
+   }
+   fclose(fptr);
+   for (int a=count;a<100;++a)
+   {
+      index[count].arr = 0;
+   }
+   return arr;
+}
+
+void File_Write(char x[20], char fname[10])
+{  
+   FILE *fptr;
+   fptr = fopen(fname,"a");
+   if(fptr == NULL)
+   {
+      printf("error");
+      exit(1);
+   }
+   fprintf(fptr,"%c",x);
    fclose(fptr);
 }
 
