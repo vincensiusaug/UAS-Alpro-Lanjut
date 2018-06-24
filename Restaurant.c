@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-void File_Read();
-void File_Write(x);
+char* File_Read(char fname[10])
+void File_Write(char x[20], char fname[10])
 void Data_Show();
 void Data_Hide();
 void Data_Unhide();
