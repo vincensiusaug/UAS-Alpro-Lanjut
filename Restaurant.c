@@ -115,7 +115,7 @@ void Menu_Purchase(){
 
         choice_total = i;
 
-        if (choice_jumlah == 0 or choice_code == 0){
+        if (choice_jumlah == 0 || choice_code == 0){
             break;
         }
 
