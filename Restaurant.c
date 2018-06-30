@@ -8,6 +8,7 @@ typedef struct menu{
 };
 
 struct menu makanan[10];
+struct menu minuman[10];
 
 int price_total;
 
@@ -59,8 +60,13 @@ void Menu_Sort(){
 }
 
 void Data_Show(){
+    puts ("Makanan");
     for(int i = 0; i<10; ++i){
         printf ("%s - %d\n", makanan[i].nama, makanan[i].harga);
+    }
+    puts("Minuman");
+    for(int i = 0; i<10; ++i){
+        printf ("%s - %d\n", minuman[i].nama, minuman[i].harga);
     }
     puts ("");
 }
@@ -126,8 +132,13 @@ void Menu_Main(){
 
 void main(){
     for (int i = 0; i<10; ++i){
-        strcpy (makanan[i].nama, "aaa");
+        strcpy (makanan[i].nama, "Makanan");
         makanan[i].harga = i*1000+1000;
     }
+    for (int i = 0; i<10; ++i){
+        strcpy (minuman[i].nama, "Minuman");
+        minuman[i].harga = i*100+100;
+    }
+
     Menu_Main();
 }
