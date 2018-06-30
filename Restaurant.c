@@ -8,10 +8,19 @@ typedef struct menu{
 
 };
 
-struct menu makanan[10];
-struct menu minuman[10];
+typedef struct purchase{
+    int code;
+    char nama[100];
+    int harga;
+    int jumlah;
+    int total;
 
-int price_total;
+};
+
+struct menu makanan[100];
+struct menu minuman[100];
+
+struct purchase purchase[100];
 
 
 
@@ -20,7 +29,6 @@ void Menu_Header(){
     puts ("");
     puts ("================================");
     puts ("     Mont Blanc Restaurant      ");
-    puts ("");
     puts ("================================");
 }
 
@@ -78,17 +86,59 @@ void Menu_Show(){
     scanf ("%d");
 }
 
-void Menu_Purchase(){
-    Menu_Header();
-    int choice_list[100];
-    int choice_code, choice_jumlah;
+void receipt(total, total_price){
+    int bayar, a;
 
-    Data_Show();
-    printf ("Masukan nomer barang: ");
-    scanf ("%d", &choice_code);
-    printf ("Masukan jumlah barang: ");
-    scanf ("%d", &choice_jumlah);
-    
+    Menu_Header();
+    for (int i = 0; i < total;++i){
+        printf ("%3d - %10s - %3d - %5d - %7d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+    }
+    printf ("Total yang harus di bayar: %d\n", total_price);
+    printf ("Masukan jumlah bayar: ");
+    scanf ("%d", &bayar);
+    printf ("Kembalian: %d", bayar - total_price);
+    scanf ("%d", &a);
+}
+
+void Menu_Purchase(){
+    int choice_code, choice_jumlah, choice_total, choice;
+    int total_price = 0;
+
+    Menu_Header();
+
+    for(int i = 0;i >= 0;++i){
+        Data_Show();
+        printf ("Masukan kode barang: ");
+        scanf ("%d", &choice_code);
+        printf ("Masukan jumlah barang: ");
+        scanf ("%d", &choice_jumlah);
+
+        choice_total = i;
+
+        if (choice_jumlah == 0 or choice_code == 0){
+            break;
+        }
+
+        if(choice_code<200){ // makanan
+            choice = choice_code-100;
+            purchase[i].code = makanan[choice].code;
+            strcpy (purchase[i].nama, makanan[choice].nama);
+            purchase[i].harga = makanan[choice].harga;
+            purchase[i].jumlah = choice_jumlah;
+            purchase[i].total = makanan[choice].harga * choice_jumlah;
+            total_price += makanan[choice].harga * choice_jumlah;
+        }
+        else{ // minuman
+            choice = choice_code-200;
+            purchase[i].code = minuman[choice].code;
+            strcpy (purchase[i].nama, minuman[choice].nama);
+            purchase[i].harga = minuman[choice].harga;
+            purchase[i].jumlah = choice_jumlah;
+            purchase[i].total = minuman[choice].harga * choice_jumlah;
+            total_price += minuman[choice].harga * choice_jumlah;
+        }
+    }
+    receipt(choice_total, total_price);
 }
 
 void Menu_Main(){
