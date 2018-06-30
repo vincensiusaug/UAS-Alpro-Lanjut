@@ -2,8 +2,9 @@
 #include <string.h>
 
 typedef struct menu{
-   char nama[100];
-   int harga;
+    int code;
+    char nama[100];
+    int harga;
 
 };
 
@@ -62,11 +63,11 @@ void Menu_Sort(){
 void Data_Show(){
     puts ("Makanan");
     for(int i = 0; i<10; ++i){
-        printf ("%s - %d\n", makanan[i].nama, makanan[i].harga);
+        printf ("%d - %s - %d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
     }
-    puts("Minuman");
+    puts("\nMinuman");
     for(int i = 0; i<10; ++i){
-        printf ("%s - %d\n", minuman[i].nama, minuman[i].harga);
+        printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
     }
     puts ("");
 }
@@ -82,8 +83,8 @@ void Menu_Purchase(){
     int choice_list[100];
     int choice_code, choice_jumlah;
 
-
-    printf ("Masukan kode barang: ");
+    Data_Show();
+    printf ("Masukan nomer barang: ");
     scanf ("%d", &choice_code);
     printf ("Masukan jumlah barang: ");
     scanf ("%d", &choice_jumlah);
@@ -132,10 +133,12 @@ void Menu_Main(){
 
 void main(){
     for (int i = 0; i<10; ++i){
+        makanan[i].code = 100+i;
         strcpy (makanan[i].nama, "Makanan");
         makanan[i].harga = i*1000+1000;
     }
     for (int i = 0; i<10; ++i){
+        minuman[i].code = 200+i;
         strcpy (minuman[i].nama, "Minuman");
         minuman[i].harga = i*100+100;
     }
