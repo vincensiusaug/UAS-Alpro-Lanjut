@@ -81,6 +81,7 @@ void Data_Show(){
         printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
     }
     puts ("");
+    puts ("masukan q untuk keluar");
 }
 
 void Menu_Show(){
