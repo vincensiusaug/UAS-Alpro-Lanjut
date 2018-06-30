@@ -5,7 +5,7 @@ typedef struct menu{
     int code;
     char nama[100];
     int harga;
-
+    int status = 1;
 };
 
 typedef struct purchase{
@@ -58,7 +58,7 @@ void Menu_Add(){
     Menu_Header();
     puts ("1 - Tambah Makanan");
     puts ("2 - Tambah Minuman");
-    puts ("Q - Kembali");
+    puts ("0 - Kembali");
     
     printf ("Masukan pilihan anda: ");
     scanf ("%d", &choice);
@@ -89,11 +89,15 @@ void Menu_Sort(){
 void Data_Show(){
     puts ("Makanan");
     for(int i = 0; i<10; ++i){
-        printf ("%d - %s - %d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+        if (makanan[i].status){
+            printf ("%d - %s - %d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+        }
     }
     puts("\nMinuman");
     for(int i = 0; i<10; ++i){
-        printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+        if (minuman[i].status){
+            printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+        }   
     }
     puts ("");
 }
@@ -101,6 +105,7 @@ void Data_Show(){
 void Menu_Show(){
     Menu_Header();
     Data_Show();
+    printf ("Masukan 0 untuk kembali: ");
     scanf ("%d");
 }
 
@@ -210,7 +215,5 @@ void main(){
         strcpy (minuman[i].nama, "Minuman");
         minuman[i].harga = i*100+100;
     }
-    puts("masukan q untuk keluar!");
-
     Menu_Main();
 }
