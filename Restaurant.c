@@ -17,7 +17,8 @@ typedef struct purchase{
 
 };
 
-int jumlah_menu = 10;
+int jumlah_makanan = 10;
+int jumlah_minuman = 10;
 
 struct menu makanan[100];
 struct menu minuman[100];
@@ -184,12 +185,12 @@ void Menu_Main(){
 
 
 void main(){
-    for (int i = 0; i<jumlah_menu; ++i){
+    for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
         strcpy (makanan[i].nama, "Makanan");
         makanan[i].harga = i*1000+1000;
     }
-    for (int i = 0; i<jumlah_menu; ++i){
+    for (int i = 0; i<jumlah_minuman; ++i){
         minuman[i].code = 200+i;
         strcpy (minuman[i].nama, "Minuman");
         minuman[i].harga = i*100+100;
