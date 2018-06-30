@@ -1,16 +1,17 @@
 #include <stdio.h>
 
-
-int jumlah_barang = 50;
-
 typedef struct barang
 {
    char barang[256];
 
 } barang;
 
-int price_total;
+barang nama_makanan[10];
+barang nama_minuman[10];
+int harga_makanan[10];
+int harga_minuman[10];
 
+int price_total;
 
 
 
@@ -59,15 +60,26 @@ void Menu_Sort(){
     Menu_Header();
 }
 
+void Data_Show(){
+    puts ("aaa");
+}
+
+void Menu_Show(){
+    Menu_Header();
+    Data_Show();
+}
+
 void Menu_Purchase(){
     Menu_Header();
     int choice_list[100];
     int choice_code, choice_jumlah;
 
+
     printf ("Masukan kode barang: ");
     scanf ("%d", &choice_code);
     printf ("Masukan jumlah barang: ");
     scanf ("%d", &choice_jumlah);
+    
 }
 
 void Menu_Main(){
@@ -78,19 +90,17 @@ void Menu_Main(){
     puts ("1 - Tambah Menu");
     puts ("2 - Ubah Menu");
     puts ("3 - Urutkan Menu");
-    // puts ("4 - Tampilkan Menu");
+    puts ("4 - Tampilkan Menu");
     puts ("5 - Pembelian");
     puts ("0 - Keluar");
     puts ("");
     printf ("Masukan pilihan anda: ");
     scanf ("%d", &choice);
-    puts ("\n\n");
 
     switch (choice){
         case 0:
             break;
         case 1:
-            printf ("aaa");
             Menu_Add();
             Menu_Main();
         case 2:
@@ -99,9 +109,9 @@ void Menu_Main(){
         case 3:
             Menu_Sort();
             Menu_Main();
-        // case '4':
-        //     Data_Show();
-        //     continue;
+        case '4':
+            Data_Show();
+            Menu_Main();
         case 5:
             Menu_Purchase();
             Menu_Main();
@@ -113,8 +123,6 @@ void Menu_Main(){
 
 
 void main(){
-    barang nama[jumlah_barang];
-    int jenis[jumlah_barang];
-    int harga[jumlah_barang];
+    
     Menu_Main();
 }
