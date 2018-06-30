@@ -39,18 +39,18 @@ int Makanan(){
     char nama;
     int harga;
     printf ("Masukan nama makanan: ");
-    scanf ("%s",&nama);
+    scanf ("%s",&makanan[9].nama);
     printf ("Masukan harga makanan: ");
-    scanf ("%d",&harga);
+    scanf ("%d",&makanan[9].harga);
 }
 
 int Minuman(){
     char nama;
     int harga;
     printf ("Masukan nama minuman: ");
-    scanf ("%s",&nama);
+    scanf ("%s",&minuman[8].nama);
     printf ("Masukan harga minuman: ");
-    scanf ("%d",&harga);
+    scanf ("%s",&minuman[8].harga);
 }
 
 void Menu_Add(){
