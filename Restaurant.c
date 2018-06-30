@@ -1,15 +1,12 @@
 #include <stdio.h>
 
-typedef struct barang
-{
-   char barang[256];
+typedef struct barang{
+   char nama[100];
+   int harga;
 
 } barang;
 
-barang nama_makanan[10];
-barang nama_minuman[10];
-int harga_makanan[10];
-int harga_minuman[10];
+struct barang makanan[10];
 
 int price_total;
 
@@ -61,12 +58,16 @@ void Menu_Sort(){
 }
 
 void Data_Show(){
-    puts ("aaa");
+    for(int i = 0; i<10; ++i){
+        printf ("%10c - %d\n", makanan[i].nama, makanan[i].harga);
+    }
+    puts ("");
 }
 
 void Menu_Show(){
     Menu_Header();
     Data_Show();
+    scanf ("%d");
 }
 
 void Menu_Purchase(){
@@ -109,8 +110,8 @@ void Menu_Main(){
         case 3:
             Menu_Sort();
             Menu_Main();
-        case '4':
-            Data_Show();
+        case 4:
+            Menu_Show();
             Menu_Main();
         case 5:
             Menu_Purchase();
@@ -123,6 +124,9 @@ void Menu_Main(){
 
 
 void main(){
-    
+    for (int i = 0; i<10; ++i){
+        strcpy (makanan[i].nama, "aaa");
+        makanan[i].harga = i*1000+1000;
+    }
     Menu_Main();
 }
