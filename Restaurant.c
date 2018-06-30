@@ -38,19 +38,45 @@ void Menu_Header(){
 int Makanan(){
     char nama;
     int harga;
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    if (makanan[index].code != 0)
+    {
+        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
+        puts ("masukan 0 untuk kembali");
+
+    }
+    else 
+    {
     printf ("Masukan nama makanan: ");
-    scanf ("%s",&makanan[9].nama);
+    scanf ("%s",&makanan[index].nama);
     printf ("Masukan harga makanan: ");
-    scanf ("%d",&makanan[9].harga);
+    scanf ("%d",&makanan[index].harga);
+    }
+    scanf("%p");
 }
 
 int Minuman(){
     char nama;
     int harga;
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    if (minuman[index].code != 0)
+    {
+        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
+        puts ("masukan 0 untuk kembali");
+
+    }
+    else 
+    {
     printf ("Masukan nama minuman: ");
-    scanf ("%s",&minuman[8].nama);
+    scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
-    scanf ("%s",&minuman[8].harga);
+    scanf ("%d",&minuman[index].harga);
+    }
+    scanf("%p");
 }
 
 void Menu_Add(){
