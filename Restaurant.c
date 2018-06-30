@@ -1,23 +1,7 @@
 #include <stdio.h>
 
-char* File_Read(char fname[10])
-void File_Write(char x[20], char fname[10])
-void Data_Show();
-void Data_Hide();
-void Data_Unhide();
-void Data_Add();
-void Data_Sort();
-void Menu_Header();
-void Menu_Main();
-void Menu_Add();
-void Menu_Edit();
-void Menu_Sort();
-void Menu_Purchase();
 
-
-
-int jumlah_barang = 50; 
-
+int jumlah_barang = 50;
 
 typedef struct barang
 {
@@ -25,119 +9,18 @@ typedef struct barang
 
 } barang;
 
+int price_total;
 
 
-char* File_Read(char fname[10])
-{
-   typedef struct arr
-   {
-      char arr[100]; // 100 character array
-   }arr;
-   arr index[100];
-   FILE *fptr;
-   fptr = fopen(fname,"a");
-   int count=0;
-   if(fptr == NULL)
-   {
-      printf("error");
-      exit(1);
-   }
-   while (!foef(fptr))
-   {
-      
-      fgets(index[count].arr,20, fptr);
-      ++count;
-   }
-   fclose(fptr);
-   for (int a=count;a<100;++a)
-   {
-      index[count].arr = 0;
-   }
-   return arr;
-}
 
-void File_Write(char x[20], char fname[10])
-{  
-   FILE *fptr;
-   fptr = fopen(fname,"a");
-   if(fptr == NULL)
-   {
-      printf("error");
-      exit(1);
-   }
-   fprintf(fptr,"%c",x);
-   fclose(fptr);
-}
-
-void Data_Show(){
-
-}
-
-void Data_Hide(){
-
-}
-
-void Data_Unhide(){
-
-}
-
-void Data_Add(){
-
-}
-
-void Data_Sort(){
-
-}
 
 void Menu_Header(){
+    system("clear");
     puts ("");
     puts ("================================");
     puts ("     Mont Blanc Restaurant      ");
     puts ("");
     puts ("================================");
-}
-
-void Menu_Main(){
-
-    char pilihan;
-
-    for(;;){
-        Menu_Header();
-        puts ("1 - Tambah Menu");
-        puts ("2 - Ubah Menu");
-        puts ("3 - Urutkan Menu");
-        puts ("4 - Tampilkan Menu");
-        puts ("5 - Pembelian");
-        puts ("Q - Keluar");
-        puts ("");
-        printf ("Masukan pilihan anda: ");
-        scanf ("%c",&pilihan);
-        printf ("%c",pilihan);
-
-        if (pilihan == '1'){
-            Menu_Add();
-            continue;
-        }
-        else if(pilihan == '2'){
-            Menu_Edit();
-            continue;
-        }
-        else if(pilihan == '3'){
-            Menu_Sort();
-            continue;
-        }
-        else if(pilihan == '4'){
-            Data_Show();
-            continue;
-        }
-        else if(pilihan == '5'){
-            Menu_Purchase();
-            continue;
-        }
-        else{
-            break;
-        }
-    }
 }
 
 int Makanan(){
@@ -147,17 +30,15 @@ int Makanan(){
     scanf ("%c",&nama);
     printf ("Masukan harga makanan: ");
     scanf ("%d",&harga);
-    return harga;
 }
 
 int Minuman(){
-    char nama[100];
+    char nama;
     int harga;
     printf ("Masukan nama minuman: ");
     scanf ("%c",&nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&harga);
-    return harga;
 }
 
 void Menu_Add(){
@@ -180,7 +61,56 @@ void Menu_Sort(){
 
 void Menu_Purchase(){
     Menu_Header();
+    int choice_list[100];
+    int choice_code, choice_jumlah;
+
+    printf ("Masukan kode barang: ");
+    scanf ("%d", &choice_code);
+    printf ("Masukan jumlah barang: ");
+    scanf ("%d", &choice_jumlah);
 }
+
+void Menu_Main(){
+
+    int choice;
+
+    Menu_Header();
+    puts ("1 - Tambah Menu");
+    puts ("2 - Ubah Menu");
+    puts ("3 - Urutkan Menu");
+    // puts ("4 - Tampilkan Menu");
+    puts ("5 - Pembelian");
+    puts ("0 - Keluar");
+    puts ("");
+    printf ("Masukan pilihan anda: ");
+    scanf ("%d", &choice);
+    puts ("\n\n");
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            printf ("aaa");
+            Menu_Add();
+            Menu_Main();
+        case 2:
+            Menu_Edit();
+            Menu_Main();
+        case 3:
+            Menu_Sort();
+            Menu_Main();
+        // case '4':
+        //     Data_Show();
+        //     continue;
+        case 5:
+            Menu_Purchase();
+            Menu_Main();
+        default:
+            Menu_Main();
+    }
+}
+
+
 
 void main(){
     barang nama[jumlah_barang];
