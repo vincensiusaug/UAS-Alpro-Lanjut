@@ -39,7 +39,7 @@ int Makanan(){
     char nama;
     int harga;
     printf ("Masukan nama makanan: ");
-    scanf ("%c",&nama);
+    scanf ("%s",&nama);
     printf ("Masukan harga makanan: ");
     scanf ("%d",&harga);
 }
@@ -48,16 +48,31 @@ int Minuman(){
     char nama;
     int harga;
     printf ("Masukan nama minuman: ");
-    scanf ("%c",&nama);
+    scanf ("%s",&nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&harga);
 }
 
 void Menu_Add(){
+    int choice;
     Menu_Header();
     puts ("1 - Tambah Makanan");
     puts ("2 - Tambah Minuman");
     puts ("Q - Kembali");
+    
+    printf ("Masukan pilihan anda: ");
+    scanf ("%d", &choice);
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Makanan();
+            Menu_Main();
+        case 2:
+            Minuman();
+            Menu_Main();
+    }
 }
 
 void Menu_Edit(){
@@ -81,7 +96,6 @@ void Data_Show(){
         printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
     }
     puts ("");
-    puts ("masukan q untuk keluar");
 }
 
 void Menu_Show(){
@@ -196,6 +210,7 @@ void main(){
         strcpy (minuman[i].nama, "Minuman");
         minuman[i].harga = i*100+100;
     }
+    puts("masukan q untuk keluar!");
 
     Menu_Main();
 }
