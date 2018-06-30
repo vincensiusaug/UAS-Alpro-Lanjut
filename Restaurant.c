@@ -1,12 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 
-typedef struct barang{
+typedef struct menu{
    char nama[100];
    int harga;
 
-} barang;
+};
 
-struct barang makanan[10];
+struct menu makanan[10];
 
 int price_total;
 
@@ -59,7 +60,7 @@ void Menu_Sort(){
 
 void Data_Show(){
     for(int i = 0; i<10; ++i){
-        printf ("%10c - %d\n", makanan[i].nama, makanan[i].harga);
+        printf ("%s - %d\n", makanan[i].nama, makanan[i].harga);
     }
     puts ("");
 }
