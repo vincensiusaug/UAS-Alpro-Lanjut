@@ -25,7 +25,17 @@ struct menu minuman[100];
 
 struct purchase purchase[100];
 
-
+void Data_hide(int jenis){
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    if (jenis == 1){
+        makanan[index].status = 0;
+    }
+    else if (jenis == 2){
+        minuman[index].status = 0;
+    }
+}
 
 void Menu_Header(){
     system("clear");
@@ -35,24 +45,95 @@ void Menu_Header(){
     puts ("================================");
 }
 
-int Makanan(){
+int Makanan_add(){
     char nama;
     int harga;
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    if (makanan[index].code != 0)
+    {
+        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
+        puts ("masukan 0 untuk kembali");
+
+    }
+    else 
+    {
     printf ("Masukan nama makanan: ");
-    scanf ("%s",&nama);
+    scanf ("%s",&makanan[index].nama);
     printf ("Masukan harga makanan: ");
-    scanf ("%d",&harga);
+    scanf ("%d",&makanan[index].harga);
+    }
+    scanf("%p");
 }
 
-int Minuman(){
+int Minuman_add(){
     char nama;
     int harga;
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    if (minuman[index].code != 0)
+    {
+        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
+        puts ("masukan 0 untuk kembali");
+
+    }
+    else 
+    {
     printf ("Masukan nama minuman: ");
-    scanf ("%s",&nama);
+    scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
-    scanf ("%d",&harga);
+    scanf ("%d",&minuman[index].harga);
+    }
+    scanf("%p");
 }
 
+int Makanan_edit(){
+    int index;
+    char lanjut = 'n';
+    puts ("masukan index: ");
+        scanf ("%d",&index);
+        char nama = makanan[index].nama;
+        int harga = makanan[index].harga;
+        printf ("Masukan nama makanan: ");
+        scanf ("%s",&makanan[index].nama);
+        printf ("Masukan harga makanan: ");
+        scanf ("%d",&makanan[index].harga);
+        if (nama != makanan[index].nama){
+            puts("Menu berhasil di edit");
+        }
+    // while (lanjut == 'n' || lanjut == 'N')
+    // {
+    //     puts ("masukan index: ");
+    //     scanf ("%d",&index);
+    //     char nama = makanan[index].nama;
+    //     int harga = makanan[index].harga;
+    //     printf ("Masukan nama makanan: ");
+    //     scanf ("%s",&makanan[index].nama);
+    //     printf ("Masukan harga makanan: ");
+    //     scanf ("%d",&makanan[index].harga);
+    //     if (nama != makanan[index].nama){
+    //         puts("Menu berhasil di edit");
+    //     }
+
+    //     puts ("continue?(Y/N)");
+    //     scanf("%c",&lanjut);
+    // }
+}
+
+int Minuman_edit(){
+    char nama;
+    int harga;
+    int index;
+    puts ("masukan index: ");
+    scanf ("%d",&index);
+    printf ("Masukan nama minuman: ");
+    scanf ("%s",&minuman[index].nama);
+    printf ("Masukan harga minuman: ");
+    scanf ("%d",&minuman[index].harga);
+    scanf("%p");
+}
 void Menu_Add(){
     int choice;
     Menu_Header();
@@ -67,19 +148,44 @@ void Menu_Add(){
         case 0:
             break;
         case 1:
-            Makanan();
+            Makanan_add();
             Menu_Add();
         case 2:
-            Minuman();
+            Minuman_add();
             Menu_Add();
     }
 }
 
 void Menu_Edit(){
+    int choice;
     Menu_Header();
-    puts ("1 - Masukan Kode");
-    puts ("2 - Tampilkan Menu");
-    puts ("Q - Kembali");
+    puts ("1 - Edit Makanan");
+    puts ("2 - Edit Minuman");
+    puts ("3 - Hide Makanan");
+    puts ("4 - Hide Minuman");
+    puts ("0 - Kembali");
+    
+    printf ("Masukan pilihan anda: ");
+    scanf ("%d", &choice);
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Makanan_edit();
+            Menu_Edit();
+        case 2:
+            Minuman_edit();
+            Menu_Edit();
+        case 3:
+            Data_hide(1);
+            Menu_Edit();
+        case 4:
+            Data_hide(2);
+            Menu_Edit();
+
+            
+    }
 }
 
 void Menu_Sort(){
