@@ -122,6 +122,7 @@ int Makanan_edit(){
     int index;
     char lanjut = 'n';
     puts ("masukan index: ");
+        Data_show();
         scanf ("%d",&index);
         char nama = makanan[index].nama;
         int harga = makanan[index].harga;
@@ -141,6 +142,7 @@ int Minuman_edit(){
     char nama;
     int harga;
     int index;
+    Data_show();
     puts ("masukan index: ");
     scanf ("%d",&index);
     printf ("Masukan nama minuman: ");
