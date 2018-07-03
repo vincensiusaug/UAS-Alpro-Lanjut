@@ -175,9 +175,9 @@ void Data_unhide(int jenis){
 void Menu_Header(){
     system("clear");
     puts ("");
-    puts ("====================================================================");
-    puts ("                       Mont Blanc Restaurant      ");
-    puts ("====================================================================\n");
+    puts ("===================================================================================");
+    puts ("                              Mont Blanc Restaurant      ");
+    puts ("===================================================================================\n");
 }
 
 void File_Write(){
@@ -623,7 +623,7 @@ void receipt(total, total_price){
         int choice;
         Menu_Header();
         printf ("%4s | %-50s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
-        puts ("--------------------------------------------------------------------");
+        puts ("-----------------------------------------------------------------------------------");
         for (int i = 0; i < total;++i){
             printf ("%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
         }
