@@ -179,7 +179,7 @@ void Menu_Header(){
 
 void File_Write(int total, int total_price, int bayar){
     FILE *pf;
-    pf = fopen("nota.txt","w");
+    pf = fopen("nota.txt","a");
     if (pf == NULL){
         puts("Unable to open file!");
     }
