@@ -149,7 +149,7 @@ void Menu_Add(){
     puts ("1 - Tambah Makanan");
     puts ("2 - Tambah Minuman");
     puts ("0 - Kembali");
-    
+    puts ("");
     printf ("Masukan pilihan anda: ");
     scanf ("%d", &choice);
 
@@ -173,7 +173,7 @@ void Menu_Edit(){
     puts ("3 - Hide Makanan");
     puts ("4 - Hide Minuman");
     puts ("0 - Kembali");
-    
+    puts ("");
     printf ("Masukan pilihan anda: ");
     scanf ("%1d", &choice);
 
@@ -349,6 +349,7 @@ void Menu_Sort_Name(){
     puts ("1 - Ascending");
     puts ("2 - Descending");
     puts ("0 - Kembali");
+    puts ("");
     printf ("\nMasukan pilihan anda: ");
     scanf ("%d",&choice);
 
@@ -373,6 +374,7 @@ void Menu_Sort_Price(){
     puts ("1 - Ascending");
     puts ("2 - Descending");
     puts ("0 - Kembali");
+    puts ("");
     printf ("\nMasukan pilihan anda: ");
     scanf ("%d",&choice);
 
@@ -397,6 +399,7 @@ void Menu_Sort_Code(){
     puts ("1 - Ascending");
     puts ("2 - Descending");
     puts ("0 - Kembali");
+    puts ("");
     printf ("\nMasukan pilihan anda: ");
     scanf ("%d",&choice);
 
@@ -422,6 +425,7 @@ void Menu_Sort(){
     puts ("2 - Sort by Price");
     puts ("3 - Sort by Code");
     puts ("0 - Kembali");
+    puts ("");
     printf ("\nMasukan pilihan anda: ");
     scanf ("%d",&choice);
 
