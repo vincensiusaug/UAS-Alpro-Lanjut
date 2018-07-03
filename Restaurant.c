@@ -645,7 +645,7 @@ void receipt(total, total_price){
     }
 }
 
-int index(int code){
+int Index(int code){
     if(code<200){
         for(int i=0; i<jumlah_makanan; ++i){
             if(makanan[i].code == code){
