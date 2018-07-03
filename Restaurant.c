@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
 const char * nama_makanan[]={
     "French Fries ",
     "Spagetti Bolognaise",
@@ -188,23 +187,13 @@ void File_Write(){
 void Makanan_add(){
     char nama;
     int harga;
-    int index;
-    puts ("masukan index: ");
-    scanf ("%d",&index);
-    if (makanan[index].code != 0)
-    {
-        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
-        puts ("masukan 0 untuk kembali");
-
-    }
-    else 
-    {
+    int index = jumlah_makanan + 1;
     printf ("Masukan nama makanan: ");
     scanf ("%s",&makanan[index].nama);
     printf ("Masukan harga makanan: ");
     scanf ("%d",&makanan[index].harga);
-        makanan[index].status = 1;
-    }
+    makanan[index].status = 1;
+    ++jumlah_makanan;
     printf ("Press Any Key to Continue...");
     getchar();
     getchar();
@@ -213,21 +202,13 @@ void Makanan_add(){
 void Minuman_add(){
     char nama;
     int harga;
-    int index;
-    puts ("masukan index: ");
-    scanf ("%d",&index);
-    if (minuman[index].code != 0)
-    {
-        puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
-    }
-    else 
-    {
+    int index = jumlah_minuman + 1;
     printf ("Masukan nama minuman: ");
     scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&minuman[index].harga);
-        minuman[index].status = 1;
-    }
+    minuman[index].status = 1;
+    ++jumlah_minuman;
     printf ("Press Any Key to Continue...");
     getchar();
     getchar();
@@ -554,7 +535,7 @@ void Menu_Sort_Code(){
             Code_Sort(1);
             break;
         default:
-            Menu_Sort_Code();
+            Menu_Sort_Code();    if (makanan[index].code != 0)
             break;
     }
 }
@@ -643,24 +624,6 @@ void receipt(total, total_price){
                 break;
         }
     }
-}
-
-int Index(int code){
-    if(code<200){
-        for(int i=0; i<jumlah_makanan; ++i){
-            if(makanan[i].code == code){
-                return i;
-            }
-        }
-    }
-    else{
-        for(int i=0; i<jumlah_minuman; ++i){
-            if(minuman[i].code == code){
-                return i;
-            }
-        }
-    }
-    return -1;
 }
 
 void Menu_Purchase(){
