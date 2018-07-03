@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+
 const char * nama_makanan[]={
     "French Fries ",
     "Spagetti Bolognaise",
@@ -148,6 +150,17 @@ struct menu makanan[100];
 struct menu minuman[100];
 struct purchase purchase[100];
 struct temporary temp;
+
+
+
+
+char* Print_Receipt(const char *s1, const char *s2){
+    char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+    // in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
 
 void Data_hide(int jenis){
     int index;
@@ -616,8 +629,9 @@ int Index(int code){
     return -1;
 }
 
-void receipt(total, total_price){
+void Receipt(total, total_price){
     int bayar, a;
+    char* receipt = "";
 
     if(total_price>0){
         int choice;
@@ -684,7 +698,7 @@ void Menu_Purchase(){
             total_price += minuman[index].harga * choice_jumlah;
         }
     }
-    receipt(choice_total, total_price);
+    Receipt(choice_total, total_price);
 }
 
 void Menu_Main(){
@@ -734,8 +748,6 @@ void Menu_Main(){
 
 
 void main(){
-    srand(time(NULL));
-
     for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
         strcpy (makanan[i].nama, nama_makanan[i]);
