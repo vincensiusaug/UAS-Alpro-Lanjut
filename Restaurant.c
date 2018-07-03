@@ -314,19 +314,23 @@ void Visibilitas_Menu(){
             break;
         case 1:
             Menu_Header();
-            Data_Show();
+            Data_Show_Visibility();
             printf ("Masukan kode: ");
             scanf ("%d",&code);
-            Data_Visibility(code, 0);
-            Visibilitas_Menu();
+            if(code != 99){
+                Data_Visibility(code, 0);
+                Visibilitas_Menu();
+            }
             break;
         case 2:
             Menu_Header();
-            Data_Show();
+            Data_Show_Visibility();
             printf ("Masukan kode: ");
             scanf ("%d",&code);
-            Data_Visibility(code, 1);
-            Visibilitas_Menu();
+            if(code != 99){
+                Data_Visibility(code, 1);
+                Visibilitas_Menu();
+            }
             break;
     }
 }
@@ -633,6 +637,32 @@ void Data_Show(){
     puts ("");
 }
 
+void Data_Show_Visibility(){
+    printf ("Makanan - %d\n",jumlah_makanan);
+    printf ("%-4s | %-50s | %8s | Status\n","Kode", "Nama", "Harga");
+    printf ("-------------------------------------------------------------------------------\n");
+    for(int i = 0; i<jumlah_makanan; ++i){
+        if (makanan[i].status == 1){
+            printf ("%-4d | %-50s | Rp%6d | Showed\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+        }
+        else{
+            printf ("%-4d | %-50s | Rp%6d | Hidden\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+        }
+    }
+    printf ("\nMinuman - %d\n",jumlah_minuman);
+    printf ("%-4s | %-50s | %8s | Status\n","Kode", "Nama", "Harga");
+    printf ("-----------------------------------------------------------------------------\n");
+    for(int i = 0; i<jumlah_minuman; ++i){
+        if (minuman[i].status == 1){
+            printf ("%-4d | %-50s | Rp%6d | Showed\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+        }
+        else{
+            printf ("%-4d | %-50s | Rp%6d | Hidden\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+        }
+    }
+    puts ("");
+}
+
 void Menu_Show(){
     Menu_Header();
     Data_Show();
@@ -670,18 +700,7 @@ void Receipt(int total, int total_price){
         puts ("-----------------------------------------------------------------------------------");
         for (int i = 0; i < total;++i){
             printf ("%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
-            // receipt = Print_Receipt(receipt,purchase[i].code);
-            // receipt = Print_Receipt(receipt," | ");
-            // receipt = Print_Receipt(receipt,purchase[i].nama);
-            // receipt = Print_Receipt(receipt," | ");
-            // receipt = Print_Receipt(receipt,atoa(purchase[i].jumlah));
-            // receipt = Print_Receipt(receipt," | ");
-            // receipt = Print_Receipt(receipt,atoa(purchase[i].harga));
-            // receipt = Print_Receipt(receipt," | ");
-            // receipt = Print_Receipt(receipt,atoa(purchase[i].total));
-            // receipt = Print_Receipt(receipt,"\n");
         }
-        // printf ("%s",receipt);
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar     : ");
         scanf ("%d", &bayar);
