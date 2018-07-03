@@ -645,6 +645,24 @@ void receipt(total, total_price){
     }
 }
 
+int index(int code){
+    if(code<200){
+        for(int i=0; i<jumlah_makanan; ++i){
+            if(makanan[i].code == code){
+                return i;
+            }
+        }
+    }
+    else{
+        for(int i=0; i<jumlah_minuman; ++i){
+            if(minuman[i].code == code){
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
 void Menu_Purchase(){
     int choice_code, choice_jumlah, choice_total, choice;
     int total_price = 0;
