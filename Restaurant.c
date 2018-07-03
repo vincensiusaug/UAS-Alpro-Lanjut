@@ -535,7 +535,7 @@ void Menu_Sort_Code(){
             Code_Sort(1);
             break;
         default:
-            Menu_Sort_Code();    if (makanan[index].code != 0)
+            Menu_Sort_Code();
             break;
     }
 }
