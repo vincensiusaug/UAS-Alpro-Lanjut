@@ -1,21 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+
+
 
 typedef struct menu{
     int code;
-    char nama[100];
+    char nama[20];
     int harga;
     int status;
 };
 
 typedef struct purchase{
     int code;
-    char nama[100];
+    char nama[20];
     int harga;
     int jumlah;
     int total;
+};
 
+typedef struct temporary{
+    int code;
+    char nama[20];
+    int harga;
+    int status;
 };
 
 int jumlah_makanan = 10;
@@ -23,8 +32,8 @@ int jumlah_minuman = 10;
 
 struct menu makanan[100];
 struct menu minuman[100];
-
 struct purchase purchase[100];
+struct temporary temp;
 
 void Data_hide(int jenis){
     int index;
@@ -189,8 +198,191 @@ void Menu_Edit(){
     }
 }
 
-void Menu_Sort(){
+void Sort_Makanan(int n){
+    temp.code = makanan[n].code;
+    strcpy (temp.nama, makanan[n].nama);
+    temp.harga = makanan[n].harga;
+    temp.status = makanan[n].status;
+
+    makanan[n].code = makanan[n+1].code;
+    strcpy (makanan[n].nama, makanan[n+1].nama);
+    makanan[n].harga = makanan[n+1].harga;
+    makanan[n].status = makanan[n+1].status;
+
+    makanan[n+1].code = temp.code;
+    strcpy (makanan[n+1].nama, temp.nama);
+    makanan[n+1].harga = temp.harga;
+    makanan[n+1].status = temp.status;
+}
+
+void Sort_Minuman(int n){
+
+    // tmp = n
+    // n = n+1
+    // n+1 = tmp
+
+    temp.code = minuman[n].code;
+    strcpy (temp.nama, minuman[n].nama);
+    temp.harga = minuman[n].harga;
+    temp.status = minuman[n].status;
+
+    minuman[n].code = minuman[n+1].code;
+    strcpy (minuman[n].nama, minuman[n+1].nama);
+    minuman[n].harga = minuman[n+1].harga;
+    minuman[n].status = minuman[n+1].status;
+
+    minuman[n+1].code = temp.code;
+    strcpy (minuman[n+1].nama, temp.nama);
+    minuman[n+1].harga = temp.harga;
+    minuman[n+1].status = temp.status;
+}
+
+void Price_Sort(int status){
+    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
+        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            if(status == 0){
+                if(makanan[j].harga>makanan[j+1].harga){
+                    Sort_Makanan(j);
+                }
+            }
+            else{
+                if(makanan[j].harga<makanan[j+1].harga){
+                    Sort_Makanan(j);
+                }
+            }
+        }
+    }
+
+    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
+        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            if(status == 0){
+                if(minuman[j].harga>minuman[j+1].harga){
+                    Sort_Minuman(j);
+                }
+            }
+            else{
+                if(minuman[j].harga<minuman[j+1].harga){
+                    Sort_Minuman(j);
+                }
+            }
+        }
+    }
+}
+
+void Code_Sort(int status){
+    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
+        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            if(status == 0){
+                if(makanan[j].code>makanan[j+1].code){
+                    Sort_Makanan(j);
+                }
+            }
+            else{
+                if(makanan[j].code<makanan[j+1].code){
+                    Sort_Makanan(j);
+                }
+            }
+        }
+    }
+
+    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
+        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            if(status == 0){
+                if(minuman[j].code>minuman[j+1].code){
+                    Sort_Minuman(j);
+                }
+            }
+            else{
+                if(minuman[j].code<minuman[j+1].code){
+                    Sort_Minuman(j);
+                }
+            }
+        }
+    }
+}
+
+void Menu_Sort_Name(){
     Menu_Header();
+    puts ("1 - Ascending");
+    puts ("2 - Descending");
+    puts ("0 - Kembali");
+}
+
+void Menu_Sort_Price(){
+    int choice;
+    Menu_Header();
+    puts ("1 - Ascending");
+    puts ("2 - Descending");
+    puts ("0 - Kembali");
+    printf ("\nMasukan pilihan anda: ");
+    scanf ("%d",&choice);
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Price_Sort(0);
+            break;
+        case 2:
+            Price_Sort(1);
+            break;
+        default:
+            Menu_Sort_Price();
+    }
+}
+
+void Menu_Sort_Code(){
+    int choice;
+    Menu_Header();
+    puts ("1 - Ascending");
+    puts ("2 - Descending");
+    puts ("0 - Kembali");
+    printf ("\nMasukan pilihan anda: ");
+    scanf ("%d",&choice);
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Code_Sort(0);
+            break;
+        case 2:
+            Code_Sort(1);
+            break;
+        default:
+            Menu_Sort_Code();
+    }
+}
+
+void Menu_Sort(){
+    int choice;
+    Menu_Header();
+    puts ("1 - Sort by Name");
+    puts ("2 - Sort by Price");
+    puts ("3 - Sort by Code");
+    puts ("0 - Kembali");
+    printf ("\nMasukan pilihan anda: ");
+    scanf ("%d",&choice);
+
+
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Menu_Sort_Name();
+            break;
+        case 2:
+            Menu_Sort_Price();
+            break;
+        case 3:
+            Menu_Sort_Code();
+            break;
+        default:
+            Menu_Sort();
+    }
+
+    Price_Sort(1);
 }
 
 void Data_Show(){
@@ -259,10 +451,6 @@ void Menu_Purchase(){
             break;
         }
 
-        
-
-        
-
         if(choice_code<200){ // makanan
             choice = choice_code-100;
             purchase[i].code = makanan[choice].code;
@@ -298,7 +486,7 @@ void Menu_Main(){
     puts ("0 - Keluar");
     puts ("");
     printf ("Masukan pilihan anda: ");
-    scanf ("%d", &choice);
+    scanf ("%1d", &choice);
 
     switch (choice){
         case 0:
@@ -326,16 +514,18 @@ void Menu_Main(){
 
 
 void main(){
+    srand(time(NULL));
+
     for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
         strcpy (makanan[i].nama, "Makanan");
-        makanan[i].harga = i*1000+1000;
+        makanan[i].harga = rand()%20*2000+1000;
         makanan[i].status = 1;
     }
     for (int i = 0; i<jumlah_minuman; ++i){
         minuman[i].code = 200+i;
         strcpy (minuman[i].nama, "Minuman");
-        minuman[i].harga = i*100+100;
+        minuman[i].harga = rand()%20*500+1000;
         minuman[i].status = 1;
     }
     Menu_Main();
