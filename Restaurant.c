@@ -628,9 +628,9 @@ void receipt(total, total_price){
             printf ("%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
         }
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
-        printf ("Masukan jumlah bayar : ");
+        printf ("Masukan jumlah bayar     : ");
         scanf ("%d", &bayar);
-        printf ("\nKembalian            : %d\n\n", bayar - total_price);
+        printf ("Kembalian                : %d\n\n", bayar - total_price);
         puts ("1 - Print Receipt");
         puts ("0 - Kembali");
         printf ("\nPilihan anda:");
