@@ -149,16 +149,6 @@ struct menu minuman[100];
 struct purchase purchase[100];
 struct temporary temp;
 
-
-
-
-char* Print_Receipt(const char *s1, const char *s2){
-    char *result = malloc(strlen(s1) + strlen(s2) + 1);
-    strcpy(result, s1);
-    strcat(result, s2);
-    return result;
-}
-
 void Data_Visibility(int code, int status){
     int index = Index(code);
     if(status == 0){
@@ -276,6 +266,7 @@ void Minuman_Data_Edit(){
     minuman[index].harga = harga;
     strcpy(minuman[index].nama, nama);
 }
+
 void Menu_Add(){
     int choice;
     Menu_Header();
@@ -361,8 +352,6 @@ void Menu_Edit(){
             Visibilitas_Menu();
             Menu_Edit();
             break;
-
-            
     }
 }
 
@@ -804,8 +793,6 @@ void Menu_Main(){
             break;
     }
 }
-
-
 
 void main(){
     for (int i = 0; i<jumlah_makanan; ++i){
