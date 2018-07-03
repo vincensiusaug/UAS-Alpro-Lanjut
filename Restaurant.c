@@ -200,12 +200,13 @@ void File_Write(){
 void Makanan_add(){
     char nama;
     int harga;
-    int index = jumlah_makanan + 1;
+    int index = jumlah_makanan;
     printf ("Masukan nama makanan: ");
     scanf ("%s",&makanan[index].nama);
     printf ("Masukan harga makanan: ");
     scanf ("%d",&makanan[index].harga);
     makanan[index].status = 1;
+    makanan[index].code = 100+index;
     ++jumlah_makanan;
     printf ("Press Any Key to Continue...");
     getchar();
@@ -215,18 +216,18 @@ void Makanan_add(){
 void Minuman_add(){
     char nama;
     int harga;
-    int index = jumlah_minuman + 1;
+    int index = jumlah_minuman;
     printf ("Masukan nama minuman: ");
     scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&minuman[index].harga);
     minuman[index].status = 1;
+    minuman[index].code = 100+index;
     ++jumlah_minuman;
     printf ("Press Any Key to Continue...");
     getchar();
     getchar();
     }
-
 void Makanan_edit(){
     int index;
     char lanjut = 'n';
