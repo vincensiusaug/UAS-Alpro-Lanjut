@@ -54,7 +54,11 @@ void Menu_Header(){
     puts ("======================================================\n");
 }
 
-int Makanan_add(){
+void File_Write(){
+
+}
+
+void Makanan_add(){
     char nama;
     int harga;
     int index;
@@ -76,7 +80,7 @@ int Makanan_add(){
     scanf("%p");
 }
 
-int Minuman_add(){
+void Minuman_add(){
     char nama;
     int harga;
     int index;
@@ -98,7 +102,7 @@ int Minuman_add(){
     scanf("%p");
 }
 
-int Makanan_edit(){
+void Makanan_edit(){
     int index;
     char lanjut = 'n';
     puts ("masukan index: ");
@@ -131,7 +135,7 @@ int Makanan_edit(){
     // }
 }
 
-int Minuman_edit(){
+void Minuman_edit(){
     char nama;
     int harga;
     int index;
@@ -480,6 +484,7 @@ void receipt(total, total_price){
     int bayar, a;
 
     if(total_price>0){
+        int choice;
         Menu_Header();
         printf ("%4s | %-20s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
         puts ("-----------------------------------------------------");
@@ -489,10 +494,17 @@ void receipt(total, total_price){
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar : ");
         scanf ("%d", &bayar);
-        printf ("\nKembalian            : %d\n\n", bayar - total_price);
-        printf ("Press Enter to Continue...");
-        getchar();
-        getchar();
+        printf ("\nKembalian            : %d\n", bayar - total_price);
+        printf ("1 - Print Receipt");
+        printf ("0 - Kembali");
+        scanf ("%1d",&choice);
+        switch (choice){
+            case 0:
+                break;
+            case 1:
+                File_Write();
+                break;
+        }
     }
 }
 
