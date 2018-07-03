@@ -49,9 +49,9 @@ void Data_hide(int jenis){
 void Menu_Header(){
     system("clear");
     puts ("");
-    puts ("================================");
-    puts ("     Mont Blanc Restaurant      ");
-    puts ("================================");
+    puts ("======================================================");
+    puts ("                Mont Blanc Restaurant      ");
+    puts ("======================================================\n");
 }
 
 int Makanan_add(){
@@ -450,19 +450,19 @@ void Menu_Sort(){
 
 void Data_Show(){
     puts ("Makanan");
-    printf ("%-4s | %-20s | %8s\n","Kode", "Nama", "Harga");
-    printf ("--------------------------------------\n");
+    printf ("%-4s | %-36s | %8s\n","Kode", "Nama", "Harga");
+    printf ("------------------------------------------------------\n");
     for(int i = 0; i<10; ++i){
         if (makanan[i].status == 1){
-            printf ("%-4d | %-20s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+            printf ("%-4d | %-36s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
         }
     }
     puts("\nMinuman");
-    printf ("%-4s | %-20s | %8s\n","Kode", "Nama", "Harga");
-    printf ("--------------------------------------\n");
+    printf ("%-4s | %-36s | %8s\n","Kode", "Nama", "Harga");
+    printf ("------------------------------------------------------\n");
     for(int i = 0; i<10; ++i){
         if (minuman[i].status == 1){
-            printf ("%-4d | %-20s | %6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+            printf ("%-4d | %-36s | Rp%6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
         }   
     }
     puts ("");
@@ -471,7 +471,7 @@ void Data_Show(){
 void Menu_Show(){
     Menu_Header();
     Data_Show();
-    printf ("Press Any Key to Continue...");
+    printf ("Press Enter to Continue...");
     getchar();
     getchar();
 }
@@ -481,14 +481,16 @@ void receipt(total, total_price){
 
     if(total_price>0){
         Menu_Header();
+        printf ("%4s | %-20s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
+        puts ("-----------------------------------------------------");
         for (int i = 0; i < total;++i){
-            printf ("%3d - %10s - %3d - %5d - %7d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+            printf ("%4d | %-20s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
         }
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar : ");
         scanf ("%d", &bayar);
         printf ("\nKembalian            : %d\n\n", bayar - total_price);
-        printf ("Press Any Key to Continue...");
+        printf ("Press Enter to Continue...");
         getchar();
         getchar();
     }
