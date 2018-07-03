@@ -571,7 +571,7 @@ void Menu_Sort(){
 }
 
 void Data_Show(){
-    puts ("Makanan");
+    printf ("Makanan - %d\n",jumlah_makanan);
     printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
     printf ("--------------------------------------------------------------------\n");
     for(int i = 0; i<jumlah_makanan; ++i){
@@ -579,7 +579,7 @@ void Data_Show(){
             printf ("%-4d | %-50s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
         }
     }
-    puts("\nMinuman");
+    printf ("\nMinuman - %d\n",jumlah_minuman);
     printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
     printf ("--------------------------------------------------------------------\n");
     for(int i = 0; i<jumlah_minuman; ++i){
@@ -596,6 +596,24 @@ void Menu_Show(){
     printf ("Press Enter to Continue...");
     getchar();
     getchar();
+}
+
+int Index(int code){
+    if(code<200){
+        for(int i=0; i<jumlah_makanan; ++i){
+            if(makanan[i].code == code){
+                return i;
+            }
+        }
+    }
+    else{
+        for(int i=0; i<jumlah_minuman; ++i){
+            if(minuman[i].code == code){
+                return i;
+            }
+        }
+    }
+    return -1;
 }
 
 void receipt(total, total_price){
