@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-
 
 const char * nama_makanan[]={
     "French Fries ",
@@ -155,33 +153,29 @@ struct temporary temp;
 
 
 char* Print_Receipt(const char *s1, const char *s2){
-    char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
-    // in real code you would check for errors in malloc here
+    char *result = malloc(strlen(s1) + strlen(s2) + 1);
     strcpy(result, s1);
     strcat(result, s2);
     return result;
 }
 
-void Data_hide(int jenis){
-    int index;
-    puts ("masukan index: ");
-    scanf ("%d",&index);
-    if (jenis == 1){
-        makanan[index].status = 0;
+void Data_Visibility(int code, int status){
+    int index = Index(code);
+    if(status == 0){
+        if(code < 200){
+            makanan[index].status = 0;
+        }
+        else{
+            minuman[index].status = 0;
+        }
     }
-    else if (jenis == 2){
-        minuman[index].status = 0;
-    }
-}
-void Data_unhide(int jenis){
-    int index;
-    puts ("masukan index: ");
-    scanf ("%d",&index);
-    if (jenis == 1){
-        makanan[index].status = 1;
-    }
-    else if (jenis == 2){
-        minuman[index].status = 1;
+    else{
+        if(code < 200){
+            makanan[index].status = 1;
+        }
+        else{
+            minuman[index].status = 1;
+        }
     }
 }
 
@@ -198,70 +192,59 @@ void File_Write(){
 }
 
 void Makanan_add(){
-    char nama;
-    int harga;
-    int index = jumlah_makanan;
-    printf ("Masukan nama makanan: ");
-    scanf ("%s",&makanan[index].nama);
-    printf ("Masukan harga makanan: ");
-    scanf ("%d",&makanan[index].harga);
-    makanan[index].status = 1;
-    makanan[index].code = 100+index;
+    Menu_Header();
+    printf ("Masukan nama: ");
+    scanf ("%s",&makanan[jumlah_makanan].nama);
+    printf ("Masukan harga: ");
+    scanf ("%d",&makanan[jumlah_makanan].harga);
+    makanan[jumlah_makanan].status = 1;
+    makanan[jumlah_makanan].code = jumlah_makanan + 1;
     ++jumlah_makanan;
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
-    }
-
-void Minuman_add(){
-    char nama;
-    int harga;
-    int index = jumlah_minuman;
-    printf ("Masukan nama minuman: ");
-    scanf ("%s",&minuman[index].nama);
-    printf ("Masukan harga minuman: ");
-    scanf ("%d",&minuman[index].harga);
-    minuman[index].status = 1;
-    minuman[index].code = 100+index;
-    ++jumlah_minuman;
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
-    }
-void Makanan_edit(){
-    int index;
-    char lanjut = 'n';
-    puts ("masukan index: ");
-        scanf ("%d",&index);
-        char nama = makanan[index].nama;
-        int harga = makanan[index].harga;
-        printf ("Masukan nama makanan: ");
-        scanf ("%s",&makanan[index].nama);
-        printf ("Masukan harga makanan: ");
-        scanf ("%d",&makanan[index].harga);
-        if (nama != makanan[index].nama){
-            puts("Menu berhasil di edit");
-        }
-        printf ("Press Any Key to Continue...");
-        getchar();
-        getchar();
-
 }
 
-void Minuman_edit(){
-    char nama;
+void Minuman_add(){
+    Menu_Header();
+    printf ("Masukan nama: ");
+    scanf ("%s",&minuman[jumlah_minuman].nama);
+    printf ("Masukan harga: ");
+    scanf ("%d",&minuman[jumlah_minuman].harga);
+    minuman[jumlah_minuman].status = 1;
+    minuman[jumlah_minuman].code = jumlah_minuman + 1;
+    ++jumlah_minuman;
+}
+
+void Makanan_Data_Edit(){
+    int code;
     int harga;
-    int index;
+    char nama[50];
+    Menu_Header();
     Data_Show();
-    puts ("masukan kode: ");
-    scanf ("%d",&index);
-    printf ("Masukan nama minuman: ");
-    scanf ("%s",&minuman[index].nama);
-    printf ("Masukan harga minuman: ");
-    scanf ("%d",&minuman[index].harga);
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
+    printf ("Masukan kode: ");
+    scanf ("%d",&code);
+    int index = Index(code);
+    printf ("Masukan harga: ");
+    scanf ("%d",&harga);
+    printf ("Masukan nama: ");
+    scanf ("%s",&nama);
+    makanan[index].harga = harga;
+    strcpy(makanan[index].nama, nama);
+}
+
+void Minuman_Data_Edit(){
+    int code;
+    int harga;
+    char nama[50];
+    Menu_Header();
+    Data_Show();
+    printf ("Masukan kode: ");
+    scanf ("%d",&code);
+    int index = Index(code);
+    printf ("Masukan harga: ");
+    scanf ("%d",&harga);
+    printf ("Masukan nama: ");
+    scanf ("%s",&nama);
+    minuman[index].harga = harga;
+    strcpy(minuman[index].nama, nama);
 }
 void Menu_Add(){
     int choice;
@@ -278,11 +261,42 @@ void Menu_Add(){
             break;
         case 1:
             Makanan_add();
-            Menu_Add();
             break;
         case 2:
             Minuman_add();
-            Menu_Add();
+            break;
+    }
+}
+
+void Visibilitas_Menu(){
+    int choice, code;
+    Menu_Header();
+    puts ("1 - Sembunyikan Menu");
+    puts ("2 - Munculkan Menu");
+    puts ("0 - Kembali");
+    puts ("");
+    printf ("Masukan pilihan anda: ");
+    scanf ("%1d", &choice);
+    puts ("");
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Menu_Header();
+            Data_Show();
+            printf ("Masukan kode: ");
+            scanf ("%d",&code);
+            Data_Visibility(code, 0);
+            Visibilitas_Menu();
+            break;
+        case 2:
+            Menu_Header();
+            Data_Show();
+            printf ("Masukan kode: ");
+            scanf ("%d",&code);
+            Data_Visibility(code, 1);
+            Visibilitas_Menu();
             break;
     }
 }
@@ -292,10 +306,7 @@ void Menu_Edit(){
     Menu_Header();
     puts ("1 - Edit Makanan");
     puts ("2 - Edit Minuman");
-    puts ("3 - Hide Makanan");
-    puts ("4 - Hide Minuman");
-    puts ("5 - Unhide Makanan");
-    puts ("6 - Unhide Minuman");
+    puts ("3 - Visibilitas");
     puts ("0 - Kembali");
     puts ("");
     printf ("Masukan pilihan anda: ");
@@ -305,27 +316,15 @@ void Menu_Edit(){
         case 0:
             break;
         case 1:
-            Makanan_edit();
+            Makanan_Data_Edit();
             Menu_Edit();
             break;
         case 2:
-            Minuman_edit();
+            Minuman_Data_Edit();
             Menu_Edit();
             break;
         case 3:
-            Data_hide(1);
-            Menu_Edit();
-            break;
-        case 4:
-            Data_hide(2);
-            Menu_Edit();
-            break;
-        case 5:
-            Data_unhide(1);
-            Menu_Edit();
-            break;
-        case 6:
-            Data_unhide(2);
+            Visibilitas_Menu();
             Menu_Edit();
             break;
 
@@ -641,14 +640,25 @@ void Receipt(total, total_price){
         puts ("-----------------------------------------------------------------------------------");
         for (int i = 0; i < total;++i){
             printf ("%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+            // receipt = Print_Receipt(receipt,purchase[i].code);
+            // receipt = Print_Receipt(receipt," | ");
+            // receipt = Print_Receipt(receipt,purchase[i].nama);
+            // receipt = Print_Receipt(receipt," | ");
+            // receipt = Print_Receipt(receipt,atoa(purchase[i].jumlah));
+            // receipt = Print_Receipt(receipt," | ");
+            // receipt = Print_Receipt(receipt,atoa(purchase[i].harga));
+            // receipt = Print_Receipt(receipt," | ");
+            // receipt = Print_Receipt(receipt,atoa(purchase[i].total));
+            // receipt = Print_Receipt(receipt,"\n");
         }
+        // printf ("%s",receipt);
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar     : ");
         scanf ("%d", &bayar);
         printf ("Kembalian                : %d\n\n", bayar - total_price);
         puts ("1 - Print Receipt");
         puts ("0 - Kembali");
-        printf ("\nPilihan anda:");
+        printf ("\nPilihan anda: ");
         scanf ("%1d",&choice);
         switch (choice){
             case 0:
