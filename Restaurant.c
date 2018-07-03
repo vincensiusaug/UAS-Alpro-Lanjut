@@ -2,6 +2,34 @@
 #include <stdlib.h>
 #include <string.h>
 
+void Data_Visibility(int code, int status);
+void Menu_Header();
+void File_Write(int total, int total_price, int bayar);
+void Makanan_add();
+void Minuman_add();
+void Makanan_Data_Edit();
+void Minuman_Data_Edit();
+void Menu_Add();
+void Visibilitas_Menu();
+void Menu_Edit();
+void Sort_Makanan(int n);
+void Sort_Minuman(int n);
+void Name_Sort(int status);
+void Price_Sort(int status);
+void Code_Sort(int status);
+void Menu_Sort_Name();
+void Menu_Sort_Price();
+void Menu_Sort_Code();
+void Menu_Sort();
+void Data_Show();
+void Data_Show_Visibility();
+void Menu_Show();
+int Index(int code);
+void Receipt(int total, int total_price);
+void Menu_Purchase();
+void Menu_Main();
+
+
 const char * nama_makanan[]={
     "French Fries ",
     "Spagetti Bolognaise",
@@ -124,7 +152,7 @@ typedef struct menu{
     char nama[50];
     int harga;
     int status;
-};
+}menu;
 
 typedef struct purchase{
     int code;
@@ -132,22 +160,22 @@ typedef struct purchase{
     int harga;
     int jumlah;
     int total;
-};
+}purch;
 
 typedef struct temporary{
     int code;
     char nama[50];
     int harga;
     int status;
-};
+}temporary;
 
 int jumlah_makanan = n_makanan;
 int jumlah_minuman = n_minuman;
 
-struct menu makanan[100];
-struct menu minuman[100];
-struct purchase purchase[100];
-struct temporary temp;
+menu makanan[100];
+menu minuman[100];
+purch purchase[100];
+temporary temp;
 
 void Data_Visibility(int code, int status){
     int index = Index(code);
@@ -204,7 +232,7 @@ void Makanan_add(){
     int harga;
     Menu_Header();
     printf ("Masukan nama: ");
-    gets();
+    gets(nama);
     fgets(nama, 50, stdin);
     strtok(nama, "\n");
     strcpy(makanan[jumlah_makanan].nama, nama);
@@ -221,7 +249,7 @@ void Minuman_add(){
     int harga;
     Menu_Header();
     printf ("Masukan nama: ");
-    gets();
+    gets(nama);
     fgets(nama, 50, stdin);
     strtok(nama, "\n");
     strcpy(minuman[jumlah_minuman].nama, nama);
@@ -238,14 +266,14 @@ void Makanan_Data_Edit(){
     int harga;
     char nama[50];
     Menu_Header();
-    Data_Show();
+    Data_Show(1);
     printf ("Masukan kode: ");
     scanf ("%d",&code);
     int index = Index(code);
+    printf ("Masukan nama: ");
+    scanf ("%s",nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
-    printf ("Masukan nama: ");
-    scanf ("%s",&nama);
     makanan[index].harga = harga;
     strcpy(makanan[index].nama, nama);
 }
@@ -255,14 +283,14 @@ void Minuman_Data_Edit(){
     int harga;
     char nama[50];
     Menu_Header();
-    Data_Show();
+    Data_Show(2);
     printf ("Masukan kode: ");
     scanf ("%d",&code);
     int index = Index(code);
+    printf ("Masukan nama: ");
+    scanf ("%s",nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
-    printf ("Masukan nama: ");
-    scanf ("%s",&nama);
     minuman[index].harga = harga;
     strcpy(minuman[index].nama, nama);
 }
@@ -606,22 +634,26 @@ void Menu_Sort(){
     }
 }
 
-void Data_Show(){
-    printf ("Makanan - %d\n",jumlah_makanan);
-    printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
-    printf ("--------------------------------------------------------------------\n");
-    for(int i = 0; i<jumlah_makanan; ++i){
-        if (makanan[i].status == 1){
-            printf ("%-4d | %-50s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+void Data_Show(int type){
+    if(type == 1 || type == 3){
+        printf ("Makanan - %d\n",jumlah_makanan);
+        printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
+        printf ("--------------------------------------------------------------------\n");
+        for(int i = 0; i<jumlah_makanan; ++i){
+            if (makanan[i].status == 1){
+                printf ("%-4d | %-50s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+            }
         }
     }
-    printf ("\nMinuman - %d\n",jumlah_minuman);
-    printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
-    printf ("--------------------------------------------------------------------\n");
-    for(int i = 0; i<jumlah_minuman; ++i){
-        if (minuman[i].status == 1){
-            printf ("%-4d | %-50s | Rp%6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
-        }   
+    if(type == 2 || type == 3){
+        printf ("\nMinuman - %d\n",jumlah_minuman);
+        printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
+        printf ("--------------------------------------------------------------------\n");
+        for(int i = 0; i<jumlah_minuman; ++i){
+            if (minuman[i].status == 1){
+                printf ("%-4d | %-50s | Rp%6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+            }   
+        }
     }
     puts ("");
 }
@@ -654,7 +686,7 @@ void Data_Show_Visibility(){
 
 void Menu_Show(){
     Menu_Header();
-    Data_Show();
+    Data_Show(3);
     printf ("Press Enter to Continue...");
     getchar();
     getchar();
@@ -715,7 +747,8 @@ void Menu_Purchase(){
     Menu_Header();
 
     for(int i = 0;i >= 0;++i){
-        Data_Show();
+        Menu_Header();
+        Data_Show(3);
         choice_total = i;
         puts ("Masukan 0 untuk selesai\n");
         printf ("Masukan kode barang  : ");
@@ -795,6 +828,7 @@ void Menu_Main(){
 }
 
 void main(){
+    getchar();
     for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
         strcpy (makanan[i].nama, nama_makanan[i]);
