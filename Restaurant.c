@@ -192,25 +192,32 @@ void File_Write(){
 }
 
 void Makanan_add(){
+    char nama[50];
+    int harga;
     Menu_Header();
     printf ("Masukan nama: ");
-    scanf ("%s",&makanan[jumlah_makanan].nama);
+    scanf ("%s",&nama);
+    strcpy(makanan[jumlah_makanan].nama, nama);
     printf ("Masukan harga: ");
-    scanf ("%d",&makanan[jumlah_makanan].harga);
+    scanf ("%d",&harga);
+    makanan[jumlah_makanan].harga = harga;
     makanan[jumlah_makanan].status = 1;
-    makanan[jumlah_makanan].code = jumlah_makanan + 1;
-    ++jumlah_makanan;
+    makanan[jumlah_makanan].code = jumlah_makanan + 100;
+    jumlah_makanan += 1;
 }
 
 void Minuman_add(){
+    char nama[50];
+    int harga;
     Menu_Header();
     printf ("Masukan nama: ");
-    scanf ("%s",&minuman[jumlah_minuman].nama);
+    strcpy(minuman[jumlah_minuman].nama, nama);
     printf ("Masukan harga: ");
-    scanf ("%d",&minuman[jumlah_minuman].harga);
+    scanf ("%d",&harga);
+    minuman[jumlah_minuman].harga = harga;
     minuman[jumlah_minuman].status = 1;
-    minuman[jumlah_minuman].code = jumlah_minuman + 1;
-    ++jumlah_minuman;
+    minuman[jumlah_minuman].code = jumlah_minuman + 200;
+    jumlah_minuman += 1;
 }
 
 void Makanan_Data_Edit(){
