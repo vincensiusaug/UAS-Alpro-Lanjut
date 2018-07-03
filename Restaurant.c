@@ -187,8 +187,26 @@ void Menu_Header(){
     puts ("===================================================================================\n");
 }
 
-void File_Write(){
-
+void File_Write(int total, int total_price, int bayar){
+    FILE *pf;
+    pf = fopen("nota.txt","w");
+    if (pf == NULL){
+        puts("Unable to open file!");
+    }
+    else{
+        fprintf (pf,"===================================================================================\n");
+        fprintf (pf,"                              Mont Blanc Restaurant      \n");
+        fprintf (pf,"===================================================================================\n\n");
+        fprintf (pf,"%4s | %-50s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
+        fprintf (pf,"-----------------------------------------------------------------------------------\n");
+        for (int i = 0; i < total;++i){
+            fprintf (pf,"%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+        }
+        fprintf (pf,"\nTotal yang harus di bayar: %d\n", total_price);
+        fprintf (pf,"Masukan jumlah bayar     : %d\n",bayar);
+        fprintf (pf,"Kembalian                : %d\n\n", bayar - total_price);
+        fclose(pf);
+    }
 }
 
 void Makanan_add(){
@@ -676,7 +694,7 @@ void Receipt(int total, int total_price){
             case 0:
                 break;
             case 1:
-                File_Write();
+                File_Write(total, total_price, bayar);
                 break;
         }
     }
