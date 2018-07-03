@@ -3,17 +3,133 @@
 #include <string.h>
 #include <time.h>
 
+const char * nama_makanan[]={
+    "French Fries ",
+    "Spagetti Bolognaise",
+    "Mie Ayam Teriyaki",
+    "Mie + Nasi Ayam Teriyaki Saos",
+    "Ayam + Mie Katsu Teriyaki Saos",
+    "Nasi + Sapo Tahu Seafood",
+    "Chicken Cordon Bleu",
+    "Chicken Mozarella",
+    "Chicken Chicken Steak Cheesy",
+    "Fish & Chips",
+    "Bihun Ayam",
+    "Bihun Ayam Bakso",
+    "Bihun Siram Ayam",
+    "Bihun Kuah Ayam",
+    "Bihun Goreng Sapi",
+    "Bihun Seafood",
+    "Bakso Urat Mie",
+    "Bakso Halus Mie",
+    "Bakso Campur Mie",
+    "Kwetiau Ayam",
+    "Kwetiau Bakso Ayam",
+    "Kwetiau Ayam Goreng",
+    "Kwetiau Ayam Siram",
+    "Kwetiau Sapi Goreng",
+    "Kwetiau Goreng Seafood",
+    "Kwetiau Seafood Siram",
+    "Lo Mie",
+    "Nasi + Bistik Sapi",
+    "Nasi + Bistik Ayam",
+    "Nasi Cap Cay Seafood",
+    "Nasi Ayam Cah Kapri",
+    "Nasi Ayam Cah Jamur",
+    "Nasi Fu Yung Hai",
+    "Nasi Cap Cay",
+    "Soup Ayam",
+    "Nasi Putih"
+};
+
+#define n_makanan (sizeof (nama_makanan) / sizeof (const char *))
+
+const int harga_makanan[]={
+    15500,
+    19000,
+    24000,
+    25000,
+    25000,
+    29000,
+    34000,
+    34000,
+    34000,
+    34000,
+    39000,
+    19000,
+    24000,
+    25000,
+    25000,
+    29500,
+    29500,
+    18000,
+    18500,
+    18500,
+    21000,
+    23000,
+    27500,
+    27500,
+    29500,
+    31500,
+    31500,
+    27500,
+    31000,
+    29500,
+    29500,
+    27500,
+    27500,
+    26500,
+    26500,
+    19500,
+    6000
+};
+
+const char * nama_minuman[]={
+    "Black Currant",
+    "Juice Alpukat / Lemon / Sirsak / Tomat",
+    "Harga Orange Juice",
+    "Frozen Cappucino",
+    "Milkshake Strawberry",
+    "Teh Tarik",
+    "Es Lemon tea",
+    "Es Green Tea",
+    "Harga Es Jeruk",
+    "Teh Botol Sosro",
+    "Coca Cola / Fanta",
+    "Air Mineral",
+    "Es Teh Tawar",
+    "Es Teh Manis"
+};
+
+#define n_minuman (sizeof (nama_minuman) / sizeof (const char *))
+
+int harga_minuman[]={
+    17500,
+    17500,
+    17500,
+    16500,
+    15500,
+    15500,
+    15000,
+    15000,
+    7000,
+    7000,
+    8000,
+    6500,
+    4500,
+    5000
+};
 
 typedef struct menu{
     int code;
-    char nama[20];
+    char nama[50];
     int harga;
     int status;
 };
 
 typedef struct purchase{
     int code;
-    char nama[20];
+    char nama[50];
     int harga;
     int jumlah;
     int total;
@@ -21,13 +137,13 @@ typedef struct purchase{
 
 typedef struct temporary{
     int code;
-    char nama[20];
+    char nama[50];
     int harga;
     int status;
 };
 
-int jumlah_makanan = 10;
-int jumlah_minuman = 10;
+int jumlah_makanan = n_makanan;
+int jumlah_minuman = n_minuman;
 
 struct menu makanan[100];
 struct menu minuman[100];
@@ -45,31 +161,20 @@ void Data_hide(int jenis){
         minuman[index].status = 0;
     }
 }
-void Data_unhide(int jenis){
-    int index;
-    puts ("masukan index: ");
-    scanf ("%d",&index);
-    if (jenis == 1){
-        makanan[index].status = 1;
-    }
-    else if (jenis == 2){
-        minuman[index].status = 1;
-    }
-}
 
 void Menu_Header(){
     system("clear");
     puts ("");
-    puts ("======================================================");
-    puts ("                Mont Blanc Restaurant      ");
-    puts ("======================================================\n");
+    puts ("====================================================================");
+    puts ("                       Mont Blanc Restaurant      ");
+    puts ("====================================================================\n");
 }
 
 void File_Write(){
 
 }
 
-int Makanan_add(){
+void Makanan_add(){
     char nama;
     int harga;
     int index;
@@ -87,14 +192,11 @@ int Makanan_add(){
     scanf ("%s",&makanan[index].nama);
     printf ("Masukan harga makanan: ");
     scanf ("%d",&makanan[index].harga);
-    makanan[index].status = 1;
     }
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
+    scanf("%p");
 }
 
-int Minuman_add(){
+void Minuman_add(){
     char nama;
     int harga;
     int index;
@@ -103,6 +205,7 @@ int Minuman_add(){
     if (minuman[index].code != 0)
     {
         puts ("telah terdapat data sebelumnya untuk mengubah silahkan masuk menu edit!");
+        puts ("masukan 0 untuk kembali");
 
     }
     else 
@@ -111,18 +214,14 @@ int Minuman_add(){
     scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&minuman[index].harga);
-    minuman[index].status = 1;
     }
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
+    scanf("%p");
 }
 
-int Makanan_edit(){
+void Makanan_edit(){
     int index;
     char lanjut = 'n';
     puts ("masukan index: ");
-        Data_show();
         scanf ("%d",&index);
         char nama = makanan[index].nama;
         int harga = makanan[index].harga;
@@ -133,25 +232,36 @@ int Makanan_edit(){
         if (nama != makanan[index].nama){
             puts("Menu berhasil di edit");
         }
-        printf ("Press Any Key to Continue...");
-        getchar();
-        getchar();
+    // while (lanjut == 'n' || lanjut == 'N')
+    // {
+    //     puts ("masukan index: ");
+    //     scanf ("%d",&index);
+    //     char nama = makanan[index].nama;
+    //     int harga = makanan[index].harga;
+    //     printf ("Masukan nama makanan: ");
+    //     scanf ("%s",&makanan[index].nama);
+    //     printf ("Masukan harga makanan: ");
+    //     scanf ("%d",&makanan[index].harga);
+    //     if (nama != makanan[index].nama){
+    //         puts("Menu berhasil di edit");
+    //     }
+
+    //     puts ("continue?(Y/N)");
+    //     scanf("%c",&lanjut);
+    // }
 }
 
-int Minuman_edit(){
+void Minuman_edit(){
     char nama;
     int harga;
     int index;
-    Data_show();
     puts ("masukan index: ");
     scanf ("%d",&index);
     printf ("Masukan nama minuman: ");
     scanf ("%s",&minuman[index].nama);
     printf ("Masukan harga minuman: ");
     scanf ("%d",&minuman[index].harga);
-    printf ("Press Any Key to Continue...");
-    getchar();
-    getchar();
+    scanf("%p");
 }
 void Menu_Add(){
     int choice;
@@ -169,11 +279,9 @@ void Menu_Add(){
         case 1:
             Makanan_add();
             Menu_Add();
-            break;
         case 2:
             Minuman_add();
             Menu_Add();
-            break;
     }
 }
 
@@ -184,8 +292,6 @@ void Menu_Edit(){
     puts ("2 - Edit Minuman");
     puts ("3 - Hide Makanan");
     puts ("4 - Hide Minuman");
-    puts ("5 - Unhide Makanan");
-    puts ("6 - Unhide Minuman");
     puts ("0 - Kembali");
     puts ("");
     printf ("Masukan pilihan anda: ");
@@ -197,27 +303,15 @@ void Menu_Edit(){
         case 1:
             Makanan_edit();
             Menu_Edit();
-            break;
         case 2:
             Minuman_edit();
             Menu_Edit();
-            break;
         case 3:
             Data_hide(1);
             Menu_Edit();
-            break;
         case 4:
             Data_hide(2);
             Menu_Edit();
-            break;
-        case 5:
-            Data_unhide(1);
-            Menu_Edit();
-            break;
-        case 6:
-            Data_unhide(2);
-            Menu_Edit();
-            break;
 
             
     }
@@ -476,19 +570,19 @@ void Menu_Sort(){
 
 void Data_Show(){
     puts ("Makanan");
-    printf ("%-4s | %-36s | %8s\n","Kode", "Nama", "Harga");
-    printf ("------------------------------------------------------\n");
-    for(int i = 0; i<10; ++i){
+    printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
+    printf ("--------------------------------------------------------------------\n");
+    for(int i = 0; i<jumlah_makanan; ++i){
         if (makanan[i].status == 1){
-            printf ("%-4d | %-36s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+            printf ("%-4d | %-50s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
         }
     }
     puts("\nMinuman");
-    printf ("%-4s | %-36s | %8s\n","Kode", "Nama", "Harga");
-    printf ("------------------------------------------------------\n");
-    for(int i = 0; i<10; ++i){
+    printf ("%-4s | %-50s | %8s\n","Kode", "Nama", "Harga");
+    printf ("--------------------------------------------------------------------\n");
+    for(int i = 0; i<jumlah_minuman; ++i){
         if (minuman[i].status == 1){
-            printf ("%-4d | %-36s | Rp%6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+            printf ("%-4d | %-50s | Rp%6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
         }   
     }
     puts ("");
@@ -508,10 +602,10 @@ void receipt(total, total_price){
     if(total_price>0){
         int choice;
         Menu_Header();
-        printf ("%4s | %-20s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
-        puts ("-----------------------------------------------------");
+        printf ("%4s | %-50s | %6s | %5s | %6s\n", "Kode", "Nama", "Jumlah", "Harga", "Total");
+        puts ("--------------------------------------------------------------------");
         for (int i = 0; i < total;++i){
-            printf ("%4d | %-20s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+            printf ("%4d | %-50s | %6d | %5d | %6d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
         }
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar : ");
@@ -624,14 +718,14 @@ void main(){
 
     for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
-        strcpy (makanan[i].nama, "Makanan");
-        makanan[i].harga = rand()%20*2000+1000;
+        strcpy (makanan[i].nama, nama_makanan[i]);
+        makanan[i].harga = harga_makanan[i];
         makanan[i].status = 1;
     }
     for (int i = 0; i<jumlah_minuman; ++i){
         minuman[i].code = 200+i;
-        strcpy (minuman[i].nama, "Minuman");
-        minuman[i].harga = rand()%20*500+1000;
+        strcpy (minuman[i].nama, nama_minuman[i]);
+        minuman[i].harga = harga_minuman[i];
         minuman[i].status = 1;
     }
     Menu_Main();
