@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct menu{
@@ -166,7 +167,7 @@ void Menu_Edit(){
     puts ("0 - Kembali");
     
     printf ("Masukan pilihan anda: ");
-    scanf ("%d", &choice);
+    scanf ("%1d", &choice);
 
     switch (choice){
         case 0:
@@ -194,15 +195,19 @@ void Menu_Sort(){
 
 void Data_Show(){
     puts ("Makanan");
+    printf ("%-4s | %-20s | %8s\n","Kode", "Nama", "Harga");
+    printf ("--------------------------------------\n");
     for(int i = 0; i<10; ++i){
         if (makanan[i].status == 1){
-            printf ("%d - %s - %d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
+            printf ("%-4d | %-20s | Rp%6d\n", makanan[i].code, makanan[i].nama, makanan[i].harga);
         }
     }
     puts("\nMinuman");
+    printf ("%-4s | %-20s | %8s\n","Kode", "Nama", "Harga");
+    printf ("--------------------------------------\n");
     for(int i = 0; i<10; ++i){
         if (minuman[i].status == 1){
-            printf ("%d - %s - %d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
+            printf ("%-4d | %-20s | %6d\n", minuman[i].code, minuman[i].nama, minuman[i].harga);
         }   
     }
     puts ("");
@@ -211,22 +216,27 @@ void Data_Show(){
 void Menu_Show(){
     Menu_Header();
     Data_Show();
-    printf ("Masukan 0 untuk kembali: ");
-    scanf ("%d");
+    printf ("Press Any Key to Continue...");
+    getchar();
+    getchar();
 }
 
 void receipt(total, total_price){
     int bayar, a;
 
-    Menu_Header();
-    for (int i = 0; i < total;++i){
-        printf ("%3d - %10s - %3d - %5d - %7d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+    if(total_price>0){
+        Menu_Header();
+        for (int i = 0; i < total;++i){
+            printf ("%3d - %10s - %3d - %5d - %7d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
+        }
+        printf ("Total yang harus di bayar: %d\n", total_price);
+        printf ("Masukan jumlah bayar : ");
+        scanf ("%d", &bayar);
+        printf ("Kembalian            : %d\n", bayar - total_price);
+        printf ("Press Any Key to Continue...");
+        getchar();
+        getchar();
     }
-    printf ("Total yang harus di bayar: %d\n", total_price);
-    printf ("Masukan jumlah bayar: ");
-    scanf ("%d", &bayar);
-    printf ("Kembalian: %d", bayar - total_price);
-    scanf ("%d", &a);
 }
 
 void Menu_Purchase(){
@@ -237,16 +247,21 @@ void Menu_Purchase(){
 
     for(int i = 0;i >= 0;++i){
         Data_Show();
+        choice_total = i;
         printf ("Masukan kode barang: ");
         scanf ("%d", &choice_code);
-        printf ("Masukan jumlah barang: ");
-        scanf ("%d", &choice_jumlah);
-
-        choice_total = i;
-
-        if (choice_jumlah == 0 || choice_code == 0){
+        if (choice_code == 0){
             break;
         }
+        printf ("Masukan jumlah barang: ");
+        scanf ("%d", &choice_jumlah);
+        if (choice_jumlah == 0){
+            break;
+        }
+
+        
+
+        
 
         if(choice_code<200){ // makanan
             choice = choice_code-100;
