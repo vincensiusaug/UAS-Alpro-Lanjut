@@ -363,6 +363,7 @@ void Menu_Sort_Name(){
             break;
         default:
             Menu_Sort_Price();
+            break;
     }
 }
 
@@ -386,6 +387,7 @@ void Menu_Sort_Price(){
             break;
         default:
             Menu_Sort_Price();
+            break;
     }
 }
 
@@ -409,6 +411,7 @@ void Menu_Sort_Code(){
             break;
         default:
             Menu_Sort_Code();
+            break;
     }
 }
 
@@ -550,20 +553,26 @@ void Menu_Main(){
         case 1:
             Menu_Add();
             Menu_Main();
+            break;
         case 2:
             Menu_Edit();
             Menu_Main();
+            break;
         case 3:
             Menu_Sort();
             Menu_Main();
+            break;
         case 4:
             Menu_Show();
             Menu_Main();
+            break;
         case 5:
             Menu_Purchase();
             Menu_Main();
+            break;
         default:
             Menu_Main();
+            break;
     }
 }
 
