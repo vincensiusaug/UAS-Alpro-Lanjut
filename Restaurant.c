@@ -4,7 +4,6 @@
 #include <time.h>
 
 
-
 typedef struct menu{
     int code;
     char nama[20];
@@ -199,16 +198,20 @@ void Menu_Edit(){
 }
 
 void Sort_Makanan(int n){
+
+    // tmp = n
     temp.code = makanan[n].code;
     strcpy (temp.nama, makanan[n].nama);
     temp.harga = makanan[n].harga;
     temp.status = makanan[n].status;
 
+    // n = n+1
     makanan[n].code = makanan[n+1].code;
     strcpy (makanan[n].nama, makanan[n+1].nama);
     makanan[n].harga = makanan[n+1].harga;
     makanan[n].status = makanan[n+1].status;
 
+    // n+1 = tmp
     makanan[n+1].code = temp.code;
     strcpy (makanan[n+1].nama, temp.nama);
     makanan[n+1].harga = temp.harga;
@@ -218,33 +221,70 @@ void Sort_Makanan(int n){
 void Sort_Minuman(int n){
 
     // tmp = n
-    // n = n+1
-    // n+1 = tmp
-
     temp.code = minuman[n].code;
     strcpy (temp.nama, minuman[n].nama);
     temp.harga = minuman[n].harga;
     temp.status = minuman[n].status;
 
+    // n = n+1
     minuman[n].code = minuman[n+1].code;
     strcpy (minuman[n].nama, minuman[n+1].nama);
     minuman[n].harga = minuman[n+1].harga;
     minuman[n].status = minuman[n+1].status;
 
+    // n+1 = tmp
     minuman[n+1].code = temp.code;
     strcpy (minuman[n+1].nama, temp.nama);
     minuman[n+1].harga = temp.harga;
     minuman[n+1].status = temp.status;
 }
 
+void Name_Sort(int status){
+    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
+        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            // Ascending
+            if(status == 0){
+                if(strcmp(makanan[j].nama, makanan[j+1].nama)>0){
+                    Sort_Makanan(j);
+                }
+            }
+            // Descending
+            else{
+                if(strcmp(makanan[j].nama, makanan[j+1].nama)<0){
+                    Sort_Makanan(j);
+                }
+            }
+        }
+    }
+
+    for(int i=0 ; i < jumlah_minuman-1 ; ++i){
+        for(int j=0 ; j < jumlah_minuman-i-1 ; ++j){
+            if(status == 0){
+                // Ascending
+                if(strcmp(minuman[j].nama, minuman[j+1].nama)>0){
+                    Sort_Minuman(j);
+                }
+            }
+            // Descending
+            else{
+                if(strcmp(minuman[j].nama, minuman[j+1].nama)<0){
+                    Sort_Minuman(j);
+                }
+            }
+        }
+    }
+}
+
 void Price_Sort(int status){
     for(int i=0 ; i < jumlah_makanan-1 ; ++i){
         for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+            // Ascending
             if(status == 0){
                 if(makanan[j].harga>makanan[j+1].harga){
                     Sort_Makanan(j);
                 }
             }
+            // Descending
             else{
                 if(makanan[j].harga<makanan[j+1].harga){
                     Sort_Makanan(j);
@@ -256,10 +296,12 @@ void Price_Sort(int status){
     for(int i=0 ; i < jumlah_minuman-1 ; ++i){
         for(int j=0 ; j < jumlah_minuman-i-1 ; ++j){
             if(status == 0){
+                // Ascending
                 if(minuman[j].harga>minuman[j+1].harga){
                     Sort_Minuman(j);
                 }
             }
+            // Descending
             else{
                 if(minuman[j].harga<minuman[j+1].harga){
                     Sort_Minuman(j);
@@ -302,10 +344,26 @@ void Code_Sort(int status){
 }
 
 void Menu_Sort_Name(){
+    int choice;
     Menu_Header();
     puts ("1 - Ascending");
     puts ("2 - Descending");
     puts ("0 - Kembali");
+    printf ("\nMasukan pilihan anda: ");
+    scanf ("%d",&choice);
+
+    switch (choice){
+        case 0:
+            break;
+        case 1:
+            Name_Sort(0);
+            break;
+        case 2:
+            Name_Sort(1);
+            break;
+        default:
+            Menu_Sort_Price();
+    }
 }
 
 void Menu_Sort_Price(){
