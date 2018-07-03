@@ -484,10 +484,10 @@ void receipt(total, total_price){
         for (int i = 0; i < total;++i){
             printf ("%3d - %10s - %3d - %5d - %7d\n", purchase[i].code, purchase[i].nama, purchase[i].jumlah, purchase[i].harga, purchase[i].total);
         }
-        printf ("Total yang harus di bayar: %d\n", total_price);
+        printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar : ");
         scanf ("%d", &bayar);
-        printf ("Kembalian            : %d\n", bayar - total_price);
+        printf ("\nKembalian            : %d\n\n", bayar - total_price);
         printf ("Press Any Key to Continue...");
         getchar();
         getchar();
@@ -503,7 +503,8 @@ void Menu_Purchase(){
     for(int i = 0;i >= 0;++i){
         Data_Show();
         choice_total = i;
-        printf ("Masukan kode barang: ");
+        puts ("Masukan 0 untuk selesai\n");
+        printf ("Masukan kode barang  : ");
         scanf ("%d", &choice_code);
         if (choice_code == 0){
             break;
