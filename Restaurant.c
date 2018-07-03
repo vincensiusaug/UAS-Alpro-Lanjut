@@ -631,9 +631,10 @@ void receipt(total, total_price){
         printf ("\nTotal yang harus di bayar: %d\n", total_price);
         printf ("Masukan jumlah bayar : ");
         scanf ("%d", &bayar);
-        printf ("\nKembalian            : %d\n", bayar - total_price);
-        printf ("1 - Print Receipt");
-        printf ("0 - Kembali");
+        printf ("\nKembalian            : %d\n\n", bayar - total_price);
+        puts ("1 - Print Receipt");
+        puts ("0 - Kembali");
+        printf ("\nPilihan anda:");
         scanf ("%1d",&choice);
         switch (choice){
             case 0:
@@ -664,7 +665,7 @@ int Index(int code){
 }
 
 void Menu_Purchase(){
-    int choice_code, choice_jumlah, choice_total, choice;
+    int choice_code, choice_jumlah, choice_total, choice, index;
     int total_price = 0;
 
     Menu_Header();
@@ -683,24 +684,23 @@ void Menu_Purchase(){
         if (choice_jumlah == 0){
             break;
         }
+        index = Index(choice_code);
 
         if(choice_code<200){ // makanan
-            choice = choice_code-100;
-            purchase[i].code = makanan[choice].code;
-            strcpy (purchase[i].nama, makanan[choice].nama);
-            purchase[i].harga = makanan[choice].harga;
+            purchase[i].code = makanan[index].code;
+            strcpy (purchase[i].nama, makanan[index].nama);
+            purchase[i].harga = makanan[index].harga;
             purchase[i].jumlah = choice_jumlah;
-            purchase[i].total = makanan[choice].harga * choice_jumlah;
-            total_price += makanan[choice].harga * choice_jumlah;
+            purchase[i].total = makanan[index].harga * choice_jumlah;
+            total_price += makanan[index].harga * choice_jumlah;
         }
         else{ // minuman
-            choice = choice_code-200;
-            purchase[i].code = minuman[choice].code;
-            strcpy (purchase[i].nama, minuman[choice].nama);
-            purchase[i].harga = minuman[choice].harga;
+            purchase[i].code = minuman[index].code;
+            strcpy (purchase[i].nama, minuman[index].nama);
+            purchase[i].harga = minuman[index].harga;
             purchase[i].jumlah = choice_jumlah;
-            purchase[i].total = minuman[choice].harga * choice_jumlah;
-            total_price += minuman[choice].harga * choice_jumlah;
+            purchase[i].total = minuman[index].harga * choice_jumlah;
+            total_price += minuman[index].harga * choice_jumlah;
         }
     }
     receipt(choice_total, total_price);
