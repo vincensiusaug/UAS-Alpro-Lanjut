@@ -196,7 +196,9 @@ void Makanan_add(){
     int harga;
     Menu_Header();
     printf ("Masukan nama: ");
-    scanf ("%s",&nama);
+    gets();
+    fgets(nama, 50, stdin);
+    strtok(nama, "\n");
     strcpy(makanan[jumlah_makanan].nama, nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
@@ -211,6 +213,9 @@ void Minuman_add(){
     int harga;
     Menu_Header();
     printf ("Masukan nama: ");
+    gets();
+    fgets(nama, 50, stdin);
+    strtok(nama, "\n");
     strcpy(minuman[jumlah_minuman].nama, nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
@@ -636,7 +641,7 @@ int Index(int code){
     return -1;
 }
 
-void Receipt(total, total_price){
+void Receipt(int total, int total_price){
     int bayar, a;
     char* receipt = "";
 
