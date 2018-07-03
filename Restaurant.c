@@ -253,8 +253,8 @@ void Price_Sort(int status){
         }
     }
 
-    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
-        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+    for(int i=0 ; i < jumlah_minuman-1 ; ++i){
+        for(int j=0 ; j < jumlah_minuman-i-1 ; ++j){
             if(status == 0){
                 if(minuman[j].harga>minuman[j+1].harga){
                     Sort_Minuman(j);
@@ -285,8 +285,8 @@ void Code_Sort(int status){
         }
     }
 
-    for(int i=0 ; i < jumlah_makanan-1 ; ++i){
-        for(int j=0 ; j < jumlah_makanan-i-1 ; ++j){
+    for(int i=0 ; i < jumlah_minuman-1 ; ++i){
+        for(int j=0 ; j < jumlah_minuman-i-1 ; ++j){
             if(status == 0){
                 if(minuman[j].code>minuman[j+1].code){
                     Sort_Minuman(j);
@@ -381,8 +381,6 @@ void Menu_Sort(){
         default:
             Menu_Sort();
     }
-
-    Price_Sort(1);
 }
 
 void Data_Show(){
