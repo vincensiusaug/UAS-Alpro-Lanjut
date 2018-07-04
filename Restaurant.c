@@ -828,7 +828,6 @@ void Menu_Main(){
 }
 
 void main(){
-    getchar();
     for (int i = 0; i<jumlah_makanan; ++i){
         makanan[i].code = 100+i;
         strcpy (makanan[i].nama, nama_makanan[i]);
