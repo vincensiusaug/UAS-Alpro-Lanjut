@@ -267,15 +267,18 @@ void Makanan_Data_Edit(){
     char nama[50];
     Menu_Header();
     Data_Show(1);
+    
     printf ("Masukan kode: ");
     scanf ("%d",&code);
     int index = Index(code);
     printf ("Masukan nama: ");
-    scanf ("%s",nama);
+    gets(nama);
+    fgets(nama, 50, stdin);
+    strtok(nama, "\n");
+    strcpy(makanan[index].nama, nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
     makanan[index].harga = harga;
-    strcpy(makanan[index].nama, nama);
 }
 
 void Minuman_Data_Edit(){
@@ -288,11 +291,13 @@ void Minuman_Data_Edit(){
     scanf ("%d",&code);
     int index = Index(code);
     printf ("Masukan nama: ");
-    scanf ("%s",nama);
+    gets(nama);
+    fgets(nama, 50, stdin);
+    strtok(nama, "\n");
+    strcpy(minuman[index].nama, nama);
     printf ("Masukan harga: ");
     scanf ("%d",&harga);
     minuman[index].harga = harga;
-    strcpy(minuman[index].nama, nama);
 }
 
 void Menu_Add(){
